@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取当前用户登录凭证</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDk.js'></script>
+</head>
+<body>
+    <p>通过<code>asyGetUserLoinTicket</code>获取当前用户登录凭证，用于校验鲁班用户身份<p>
+    <script class="code-js">
+        function(){
+            lbMobSDK.base.asyGetUserLoinTicket(function(opResult){
+               if(opResult.succ){
+                  alert(JSON.stringify(opResult.data));
+               }else{
+                  alert(opResult.errmsg);
+               }
+            });
+        }
+    </script>
+</body>
+</html>

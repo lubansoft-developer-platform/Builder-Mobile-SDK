@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>监控列表</title>
+    <link rel="stylesheet" href="css/index.css">
+    <!-- <script type="text/javascript" src="http://172.16.15.149:8080/mobWebSDK.js"></script>  -->
+    <script type="text/javascript" src="js/mobWebSDK.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.base64.js"></script>
+</head>
+<body>
+    <div class="btn-test">
+        <!-- <div class="btn-1" style="padding: 2vw 3vw;">获取当前用户登录凭证</div> -->
+        <!-- <div class="btn-2" style="padding: 2vw 3vw;">申请Token</div> -->
+        <!-- <div class="btn-3" style="padding: 2vw 3vw;">获取当前页面所在的菜单位置</div> -->
+    </div>
+    <div class="video-list">
+        <ul>
+            <li class="video-to">
+                <img src="img/test.jpg" />
+                <div class="video-title">
+                    <h3>舟山隧道口东</h3>
+                    <div class="video-status"><span></span>监控中</div>
+                </div>
+            </li>
+            <li class="video-to">
+                <img src="img/test.jpg" />
+                <div class="video-title">
+                    <h3>舟山隧道口西</h3>
+                    <div class="video-status"><span></span>监控中</div>
+                </div>
+            </li>
+            <li class="video-to">
+                <img src="img/test.jpg" />
+                <div class="video-title">
+                    <h3>舟山隧道口南</h3>
+                    <div class="video-status"><span></span>监控中</div>
+                </div>
+            </li>
+            <li class="video-to">
+                <img src="img/test.jpg" />
+                <div class="video-title">
+                    <h3>舟山隧道口北</h3>
+                    <div class="video-status"><span></span>监控中</div>
+                </div>
+            </li>
+            <li class="video-to">
+                <img src="img/test.jpg" />
+                <div class="video-title">
+                    <h3>舟山隧道口中</h3>
+                    <div class="video-status"><span></span>监控中</div>
+                </div>
+            </li>
+            <li class="video-add">
+                添加监控点
+            </li>
+        </ul>
+    </div>
+
+    <div class="monitor-mask monitor-box">
+        <div class="monitor-add">
+            <div class="monitor-add-title">添加监控点</div>
+            <div class="monitor-add-content">
+                <div class="content-label">
+                    <div class="label-left">监控位置：</div>
+                    <div class="label-right"><input type="text" value="舟山隧道口前门" id="monitorSite" /></div>
+                </div>
+                <div class="content-label">
+                    <div class="label-left">监控服务地址：</div>
+                    <div class="label-right"><input type="text" value="xxxxxxxxx" id="monitorUrl" /></div>
+                </div>
+                <div class="content-label">
+                    <div class="label-left">监控认证信息：</div>
+                    <div class="label-right"><input type="text" value="xxxxxxxxx" id="monitorInfo" /></div>
+                </div>
+                <div class="content-label">
+                    <div class="label-left">关联到：</div>
+                    <div class="label-right">
+                        <select id="monitorRe">
+                            <option value="0">请选择</option>
+                            <option value="1">工程</option>
+                            <option value="2">构件</option>
+                            <option value="3">类型</option>
+                        </select>
+                        <input type="text" value="" id="monitorRelation" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="monitor-add-footer">
+                <div class="btn btn-submit monitor-submit">确定</div>
+                <div class="btn btn-cancel monitor-cancel">取消</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="monitor-mask data-box">
+            <div class="monitor-add" style="margin-top: 15vh;">
+                <div class="monitor-add-title">新开窗口设置</div>
+                <div class="monitor-add-content">
+                    <div class="content-label">
+                        <div class="label-left">标题：</div>
+                        <div class="label-right"><input type="text" value="" id="dataTitle" /></div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">标题颜色：</div>
+                        <div class="label-right">
+                            <input type="radio" name="titleColor" value="#ffffff" class="titleColor" checked />白
+                            <input type="radio" name="titleColor" value="#130c0e" class="titleColor" />黑
+                            <input type="radio" name="titleColor" value="#d71345" class="titleColor" />红
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">标题位置：</div>
+                        <div class="label-right">
+                            <input type="radio" name="titleGravity" value="LEFT" class="titleGravity" checked />居左
+                            <input type="radio" name="titleGravity" value="CENTER" class="titleGravity" />居中
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">返回按钮：</div>
+                        <div class="label-right">
+                            <input type="radio" name="showBack" value="true" class="showBack" checked />显示
+                            <input type="radio" name="showBack" value="false" class="showBack" />隐藏
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">关闭按钮：</div>
+                        <div class="label-right">
+                            <input type="radio" name="showClose" value="true" class="showClose" checked />显示
+                            <input type="radio" name="showClose" value="false" class="showClose" />隐藏
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">状态栏：</div>
+                        <div class="label-right">
+                            <input type="radio" name="showStatusBar" value="true" class="showStatusBar" checked />显示
+                            <input type="radio" name="showStatusBar" value="false" class="showStatusBar" />隐藏
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                            <div class="label-left">背景色：</div>
+                            <div class="label-right">
+                                <input type="radio" name="backgroundColor" value="#145b7d" class="backgroundColor" checked />蓝
+                                <input type="radio" name="backgroundColor" value="#d71345" class="backgroundColor" />红
+                                <input type="radio" name="backgroundColor" value="#45b97c" class="backgroundColor" />绿
+                            </div>
+                        </div>
+
+                    <div class="content-label">
+                        <div class="label-left">全屏：</div>
+                        <div class="label-right">
+                            <input type="radio" name="fullScreen" value="false" class="fullScreen" checked />否
+                            <input type="radio" name="fullScreen" value="true" class="fullScreen" />是
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <div class="label-left">参数：</div>
+                            <div class="label-right"><input type="text" value="" id="dataExtr" /></div>
+                    </div>
+                </div>
+                <div class="monitor-add-footer">
+                    <div class="btn btn-submit data-submit">确定</div>
+                    <div class="btn btn-cancel data-cancel">取消</div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        $(function(){
+            //初始化
+            lbMobSDK.asyInit( {
+
+                /* 开发者申请lbToken */
+                onApplyToken: function (funResponse) {
+                    lbMobSDK.base.asyApplyToken("a56958db79c64abfa62b2a7c03c747a6", "98d4c5db9942fb13fbb8e545cb464aa47d2015fe", function (opResult) {
+                        funResponse(opResult);
+                    });
+                },
+
+                /* sdk日志信息，ilevel=0 debug 、ilevel=1 info 、ilevel=2 error*/
+                onLog: function( ilevel , strLog ) {
+                    console.log( strLog );
+                }
+
+            },function( opResult ) {
+
+                if( opResult.succ ) {
+                    // 初始化完成
+                    sdkInitOk();
+                    //alert("初始化完成");
+                }else {
+                    // 初始化失败
+                    if( opResult.errcode === lbMobSDK.errcode.NATIVE_SDK_VER_LOW ) {
+                        alert("app版本太低，请升级");
+                        lbMobSDK.base.asyCheckUpgrade();
+                    }else {
+                        alert("init sdk faild , errmsg: " + opResult.errmsg);
+                    }
+                }
+
+            });
+
+            function sdkInitOk() {
+                /*
+				var nativeSdkVer = lbMobSDK.getNativeVer();
+				alert( nativeSdkVer);
+
+				var initParam = lbMobSDK.base.getPageInitParam();
+				alert( initParam);
+                */
+            }
+
+            //获取当前用户登录凭证
+            $('.btn-1').on('click',function(){
+                lbMobSDK.base.asyGetUserLoinTicket(function(opResult){
+                    if(opResult.succ){
+                        alert(JSON.stringify(opResult.data));
+                    }else{
+                        alert(opResult.errmsg);
+                    }
+                });
+            });
+
+            //申请Token
+            $('.btn-2').on('click',function(){
+                var appKey='a56958db79c64abfa62b2a7c03c747a6';
+                var secret='98d4c5db9942fb13fbb8e545cb464aa47d2015fe';
+                lbMobSDK.base.asyApplyToken(appKey, secret,function(opResult){
+                    if(opResult.succ){
+                        alert(JSON.stringify(opResult.data));
+                    }else{
+                        alert(opResult.errmsg);
+                    }
+                });
+            });
+
+            //获取当前页面所在的菜单位置
+            $('.btn-3').on('click',function(){
+                lbMobSDK.base.asyGetCurMenuPostion(function(opResult){
+                    if(opResult.succ){
+                        alert(JSON.stringify(opResult.data));
+                    }else{
+                        alert(opResult.errmsg);
+                    }
+                });
+            });
+
+            //新增监控点关联信息
+            var refDetail = {};
+            //新增监控点关联信息数组集合
+            var refDetailArr = [];
+            var refId = 0;
+
+            //关联工程
+            $('#monitorRe').on('change',function(){
+                var mType = $(this).val();
+                if(mType != 0){
+                    var refInfo = {
+                        type:mType,
+                        refId:'10086'
+                    };
+                    lbMobSDK.base.asySelRef(refInfo,function(opResult){
+                        if(opResult.succ){
+                            var name = opResult.data.refProj.projName;
+                            refDetail = opResult.data;
+                            $('#monitorRelation').val(name);
+                        }else{
+                            alert(opResult.errmsg);
+                        }
+                    })
+                }
+            })
+
+            //监控点添加窗口打开
+            $('.video-add').on('click',function(){
+                $('#monitorRelation').val('');
+                $("#monitorRe option:first").prop("selected", 'selected');
+                $('.monitor-box').show();
+            })
+
+            //监控点添加
+            $('.monitor-submit').on('click',function(){
+                var title = $('#monitorSite').val();
+                var cont = '<li class="video-to" refId="'+ refId +'">\n' +
+                    '                    <img src="img/test.jpg" />\n' +
+                    '                    <div class="video-title">\n' +
+                    '                        <h3>'+title+'</h3>\n' +
+                    '                        <div class="video-status"><span></span>监控中</div>\n' +
+                    '                    </div>\n' +
+                    '            </li>';
+                $('.video-add').before(cont);
+                refDetailArr[refId] = refDetail;
+                refId++;
+                $('.monitor-box').hide();
+            })
+
+            //监控点添加窗口关闭
+            $('.monitor-cancel').on('click',function(){
+                $('.monitor-box').hide();
+            })
+
+            var currentRefId = -1;
+            //监控视频页面打开
+            $('.video-list').on('click','.video-to',function(){
+                $('#dataTitle').val('');
+                $("#dataIsFullScreen option:first").prop("selected", 'selected');
+                $('#dataExtr').val('');
+                currentRefId = $(this).attr('refId')?$(this).attr('refId'):-1;
+                $('.data-box').show();
+            });
+
+            //打开新窗口
+            $('.data-submit').click(function(){
+                var staticRefDetail = {
+                    "type":1,
+                    "refId":"1",
+                    "refProj": {
+                        "ppid":132051,			// 工程id，唯一标识
+                        "projName":"d1小别墅",		// 工程名称
+                        "projType":"1"		// 工程类型
+                    }
+                };
+                if(currentRefId>-1){
+                    staticRefDetail = refDetailArr[currentRefId];
+                }
+                var title = $('#dataTitle').val();
+                var titleColor = $("input[name='titleColor']:checked").val();
+                var titleGravity = $("input[name='titleGravity']:checked").val();
+                var showBack = $("input[name='showBack']:checked").val();
+                var showClose = $("input[name='showClose']:checked").val();
+                var showStatusBar = $("input[name='showStatusBar']:checked").val();
+                var backgroundColor = $("input[name='backgroundColor']:checked").val();
+                var fullScreen = $("input[name='fullScreen']:checked").val();
+                var dataExtr = $('#dataExtr').val();
+                //$('.data-box').hide();
+                var initParam = {
+                    refDetail: staticRefDetail,
+                    extr: dataExtr
+                }
+                
+                var pageInfo = '{"config":{"title":"'+title+'","titleColor":"'+titleColor+'","titleGravity":"'+titleGravity+'","showBack":'+showBack+
+                ',"showClose":'+showClose+',"showStatusBar":'+showStatusBar+',"backgroundColor":"'+backgroundColor+'","fullScreen":'+fullScreen+'},"initParam":"'+$.base64.btoa(JSON.stringify(initParam))+'"}';
+                //var url = 'http://down.lubansoft.com/idn/video.html?pageInfo='+encodeURIComponent(pageInfo);
+                var url = 'http://192.168.20.118/wap/iworks/video.html?pageInfo='+encodeURIComponent(pageInfo);
+                //alert('http://down.lubansoft.com/idn/video.html?pageInfo='+pageInfo);
+                lbMobSDK.base.asyOpenWebPage(url,
+                    function(opResult){ //完成回调
+                        alert('22222');
+                        if(opResult.succ){
+                            $('.data-box').hide();
+                        }else{
+                            alert(opResult.errmsg);
+                        }
+                    },
+                    function(opResult){ //页面关闭时回调
+                        //alert(opResult.data);
+                });
+            });
+
+            
+            //关闭窗口
+            $('.data-cancel').click(function(){
+                $('.data-box').hide();
+            });
+        })
+    </script>
+</body>
+</html>

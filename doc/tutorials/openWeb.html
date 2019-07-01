@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新开一个web页面</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDk.js'></script>
+</head>
+<body>
+    <p>通过<code>asyApplyToken</code>新开一个web页面<p>
+    <script class="code-js">
+        function(){
+            lbMobSDK.base.asyOpenWebPage(url,
+                 function(opResult){ //完成回调
+                     if(opResult.succ){
+                     }else{
+                        alert(opResult.errmsg);
+                     }
+                 },
+                 function(opResult){ //页面关闭时回调
+                 });
+        }
+    </script>
+</body>
+</html>

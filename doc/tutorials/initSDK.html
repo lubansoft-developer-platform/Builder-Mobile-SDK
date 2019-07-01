@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>初始化sdk</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDK.js'></script>
+</head>
+
+<body>
+    <p>调用<code>asyInit</code>初始化sdk</p>
+    <script class="code-js">
+        function(){
+            lbMobSDK.asyInit( {
+                             
+                 /* 开发者申请lbToken */
+                 onApplyToken: function (funResponse) {
+                     lbMobSDK.base.asyApplyToken("a56958db79c64abfa62b2a7c03c747a6", "98d4c5db9942fb13fbb8e545cb464aa47d2015fe", function (opResult) {
+                         funResponse(opResult);
+                     });
+                 },
+                 
+                 /* sdk日志信息，ilevel=0 debug 、ilevel=1 info 、ilevel=2 error*/
+                 onLog: function( ilevel , strLog ) {
+                     console.log( strLog );
+                 }
+                 
+           },function( opResult ) {
+                 
+                 if( opResult.succ ) {
+                     // 初始化完成
+                     sdkInitOk();
+                     //alert("初始化完成");
+                 }else {
+                     // 初始化失败
+                     if( opResult.errcode === lbMobSDK.errcode.NATIVE_SDK_VER_LOW ) {
+                         alert("app版本太低，请升级");
+                         lbMobSDK.base.asyCheckUpgrade();
+                     }else {
+                         alert("init sdk faild , errmsg: " + opResult.errmsg);
+                     }
+                 }
+                 
+            });
+        }
+    </script>
+</body>
+
+</html>

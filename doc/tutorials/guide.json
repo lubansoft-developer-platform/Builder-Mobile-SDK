@@ -1,0 +1,49 @@
+{
+    "1_build": {
+        "title": "环境搭建"
+    },
+    "2_guide": {
+        "title": "操作指南",
+        "children": {
+            "initSDK": {
+                "title": "如何初始化sdk?"
+            },
+            "applyToken": {
+                "title": "如何申请token?"
+            },
+            "checkUpdate": {
+                "title": "如何检查app版本更新?"
+            },
+            "openWeb": {
+                "title": "如何新开一个web页面?"
+            },
+            "closeWeb": {
+                "title": "如何关闭当前页面?"
+            },
+            "position": {
+                "title": "如何获取当前页面所在的菜单位置?"
+            },
+            "loginTicket": {
+                "title": "如何获取当前用户登录凭证?"
+            },
+            "ref": {
+                "title": "如何选择关联?"
+            },
+            "research": {
+                "title": "如何反查关联?"
+            },
+            "nativeSdk":{
+                "title": "如何获取NativeSdk版本号？"
+            },
+            "webSdk":{
+                "title": "如何获取webSdk版本号？"
+            },
+            "initParam":{
+                "title": "如何获取页面初始参数？"
+            }
+        }
+    },
+    "3_debug": {
+        "title": "调试"
+    }
+}

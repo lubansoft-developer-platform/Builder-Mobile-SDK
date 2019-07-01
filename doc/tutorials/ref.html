@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择关联性</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDk.js'></script>
+</head>
+<body>
+    <p>通过<code>asySelRef</code>选择关联到工程/构件/构件类型等<p>
+    <script class="code-js">
+        function(){
+            var refInfo;
+            lbMobSDK.base.asySelRef(refInfo,function(opResult){
+                if(opResult.succ){
+                   var name = opResult.data.refProj.projName;
+                   refDetail = opResult.data;
+                }else{
+                   alert(opResult.errmsg);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

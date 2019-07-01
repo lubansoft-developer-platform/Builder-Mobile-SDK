@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取当前页面所在的菜单位置</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDk.js'></script>
+</head>
+<body>
+  <p>通过<code>asyGetCurMenuPostion</code>获取当前页面所在的菜单位置，返回当前所属企业、项目部(可为空）、工程(可为空）<p>
+    <script class="code-js">
+        function(){
+            lbMobSDK.base.asyGetCurMenuPostion(function(opResult){
+               if(opResult.succ){
+                  alert(JSON.stringify(opResult.data));
+               }else{
+                  alert(opResult.errmsg);
+               }
+            });
+        }
+    </script>
+</body>
+</html>

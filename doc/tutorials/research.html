@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>反查关联</title>
+    <script src="./jquery.js"></script>
+    <script type='text/javascript' src='mobWebSDk.js'></script>
+</head>
+<body>
+    <p>通过<code>asyRefLocation</code>反查定位,关联到工程/构件/构件类型<p>
+    <script class="code-js">
+        function(){
+            var refDetail  = initParam.refDetail;
+            lbMobSDK.base.asyRefLocation(refDetail,function(opResult){
+                 if(opResult.succ){
+                    alert(opResult.succ);
+                 }else{
+                    alert(opResult.errmsg);
+                 }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视频播放</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/video.css" rel="stylesheet">
+    <script type="text/javascript" src="js/mobWebSDK.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src='js/video.js'></script>
+    <script type="text/javascript" src="js/jquery.base64.js"></script>
+
+    <style>
+        html,body,.video-container{width: 100vw;height: 100%;}
+        .video-container{position: relative;}
+        .video-js{width: 100vw;height: 100%;}
+        .model-check{position: absolute;bottom: 15vh;font-size: 5vw;color: red;text-align: center;width: 100%;z-index: 10;}
+        .model-close{position: absolute;bottom: 8vh;font-size: 5vw;color: red;text-align: center;width: 100%;z-index: 10;}
+    </style>
+</head>
+<body>
+<div class="video-container">
+    <video id='myvideo' class="video-js vjs-default-skin"  >
+        <source src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8">
+    </video>
+
+    <div class="model-check">
+        反查模型
+    </div>
+    <div class="model-close">
+        关闭页面
+    </div>
+
+    <div class="video-play" style="display:none">播放视频</div>
+</div>
+
+<div class="monitor-mask data-box">
+        <div class="monitor-add">
+            <div class="monitor-add-title">关闭页面</div>
+            <div class="monitor-add-content">
+                <div class="content-label">
+                    <div class="label-left">参数：</div>
+                        <div class="label-right"><input type="text" value="" id="dataExtr" /></div>
+                </div>
+            </div>
+            <div class="monitor-add-footer">
+                <div class="btn btn-submit data-submit">确定</div>
+                <div class="btn btn-cancel data-cancel">取消</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $('video').attr('x5-video-player-type', 'h5');
+    $('video').attr('webkit-playsinline', 'true');
+    // var player = videojs('myvideo', {});
+    // player.play();
+    // setTimeout(function(){
+    //     $('.video-play').trigger('click');
+    // },3000);
+
+    //反查详情信息
+    var initParam = '';
+
+    $('.video-container').on('click',function(){
+        $("video")[0].play();
+    });
+    //初始化
+    lbMobSDK.asyInit( {
+        /* 开发者申请lbToken */
+        onApplyToken: function (funResponse) {
+            lbMobSDK.base.asyApplyToken("a56958db79c64abfa62b2a7c03c747a6", "98d4c5db9942fb13fbb8e545cb464aa47d2015fe", function (opResult) {
+                funResponse(opResult);
+            });
+        },
+        /* sdk日志信息，ilevel=0 debug 、ilevel=1 info 、ilevel=2 error*/
+        onLog: function( ilevel , strLog ) {
+            console.log( strLog );
+        }
+    },function( opResult ) {
+        if( opResult.succ ) {
+            // 初始化完成
+            sdkInitOk();
+        }else {
+            // 初始化失败
+            if( opResult.errcode === lbMobSDK.errcode.NATIVE_SDK_VER_LOW ) {
+                alert("app版本太低，请升级");
+                //lbMobSDK.base.asyCheckUpgrade();
+            }else {
+                alert("init sdk faild , errmsg: " + opResult.errmsg);
+            }
+        }
+
+    });
+
+    // 初始化
+    function sdkInitOk() {
+        //alert(decodeURIComponent(lbMobSDK.base.getPageInitParam()));
+        initParam = JSON.parse($.base64.atob(decodeURIComponent(lbMobSDK.base.getPageInitParam())));
+        //alert(initParam.extr);
+    }
+
+    //反查模型
+    $('.model-check').on('click',function(){
+
+        var refDetail  = initParam.refDetail;
+        lbMobSDK.base.asyRefLocation(refDetail,function(opResult){
+            if(opResult.succ){
+                alert(opResult.succ);
+            }else{
+                alert(opResult.errmsg);
+            }
+        })
+    })
+
+    //关闭页面
+    $('.model-close').on('click',function(){
+        lbMobSDK.base.asyCloseCurPage($('#dataExtr').val(),null);
+        // $('#dataExtr').val('');
+        // $('.data-box').show();
+    })
+
+    //打开新窗口
+    $('.data-submit').click(function(){
+        lbMobSDK.base.asyCloseCurPage($('#dataExtr').val(),null);
+        $('.data-box').hide();
+    });
+
+    //关闭窗口
+    $('.data-cancel').click(function(){
+        $('.data-box').hide();
+    });
+</script>
+</body>
+</html>
